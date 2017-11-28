@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/BirdAttackMain.unity
+- path: Assets/Scene/BirdAttackMain.unity
   isLoaded: 1
   isActive: 1
