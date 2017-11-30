@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class PlayerMoveManager : MonoBehaviour
 {
-	public float ShootSpeed = 10;
-	public float ShootRotate = 30;
+	public float ShootSpeed = 10f;
 
 	private Rigidbody rbyPlayer;
 	private bool fShoot = false;
 	private bool fPlayerMove = false;
+	private Vector3 ShootVectol = Vector3.zero;
 
 	void Start()
 	{
 		rbyPlayer = GetComponent<Rigidbody>();
-	}
-
-	void Update()
-	{
-		/* マウスが押されたとき、プレイヤーが発射されていない、動いていない */
-		if( Input.GetMouseButtonDown(0) && fShoot == false && fPlayerMove == false ){
-			fShoot = true;
-		}
 	}
 
 	void FixedUpdate()
@@ -31,13 +23,20 @@ public class PlayerMoveManager : MonoBehaviour
 			fShoot = false;
 			fPlayerMove = true;
 
-			rbyPlayer.AddForce( 10, 10, 0, ForceMode.VelocityChange );
+			rbyPlayer.AddForce( ShootVectol * ShootSpeed, ForceMode.Acceleration );
 		}
 
 		/* 発射後の移動 */
 		if( fPlayerMove == true ){
 
 		}
+	}
+
+	public void ShootPlayer( Vector3 DragPosition )
+	{
+		fShoot = true;
+		rbyPlayer.useGravity = true;
+		ShootVectol = DragPosition;
 	}
 
 }

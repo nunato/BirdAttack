@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParticleDead : MonoBehaviour 
 {
-	private float lifeTime = 1f;
+	private float lifeTime = 1.0f;
 
 	void Start () {
 		Destroy( gameObject, lifeTime );
