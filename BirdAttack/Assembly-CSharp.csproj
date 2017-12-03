@@ -46,9 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\ArrowTransformController.cs" />
      <Compile Include="Assets\Script\BlockDeleat.cs" />
      <Compile Include="Assets\Script\CameraController.cs" />
      <Compile Include="Assets\Script\ClickPositionManager.cs" />
+     <Compile Include="Assets\Script\CreateLine.cs" />
      <Compile Include="Assets\Script\ParticleDead.cs" />
      <Compile Include="Assets\Script\PlayerDead.cs" />
      <Compile Include="Assets\Script\PlayerMoveManager.cs" />
