@@ -18,7 +18,7 @@ public class PlayerMoveManager : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		/* 最初の発射 */
+		/* マウスが放された時一度だけ力を加えてプレイヤーを動かす */
 		if( fShoot == true ){
 			fShoot = false;
 			fPlayerMove = true;

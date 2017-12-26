@@ -30,14 +30,20 @@ public class ArrowTransformController : MonoBehaviour
 	{
 		float diffx = DownPosition.x - DragPosition.x;
 		float diffy = DownPosition.y - DragPosition.y;
-		//長さを求める
+		Debug.Log( "x " + diffx + ",y " + diffy );
+		/* 長さを求める */
 		float panelHeight = Mathf.Sqrt( Mathf.Pow( diffx, 2) + Mathf.Pow( diffy, 2));
-		Debug.Log( "panelHeight" + panelHeight );
+//		Debug.Log( "panelHeight" + panelHeight );
 
-
-		//角度を求める
+		/* 2Dベクトルから角度を求める */
+		/* 右方向にX、上方向にYとする */
+		float rot = Mathf.Atan2( diffx, diffy ) * 180 / Mathf.PI;
+		/* ベクトルと正反対の方向に飛ぶので角度を逆転する */
+		rot = rot + 180;
+//		Debug.Log( "rot " + rot );
 
 		panelRect.position = Camera.main.WorldToScreenPoint( playerPosition );
 		panelRect.sizeDelta = new Vector2( panelWidth, panelHeight );
+		panelRect.rotation = Quaternion.Euler( 0, -180, rot );
 	}
 }
