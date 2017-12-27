@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ArrowTransformController : MonoBehaviour
 {
-	public float panelWidth = 50;
-
+	private float panelWidth;
 	private RectTransform panelRect;
 	private Vector3 playerPosition;
 
 	void Start()
 	{
 		panelRect = GetComponent<RectTransform>();
-		panelRect.sizeDelta = new Vector2( panelWidth, 0 );
+		Vector2 panelSize = panelRect.sizeDelta;
+		panelWidth = panelSize.x;
 
 		GameObject PlayerObj = GameObject.Find("Player");
 		playerPosition = PlayerObj.transform.position;
@@ -30,7 +30,7 @@ public class ArrowTransformController : MonoBehaviour
 	{
 		float diffx = DownPosition.x - DragPosition.x;
 		float diffy = DownPosition.y - DragPosition.y;
-		Debug.Log( "x " + diffx + ",y " + diffy );
+//		Debug.Log( "x " + diffx + ",y " + diffy );
 		/* 長さを求める */
 		float panelHeight = Mathf.Sqrt( Mathf.Pow( diffx, 2) + Mathf.Pow( diffy, 2));
 //		Debug.Log( "panelHeight" + panelHeight );
