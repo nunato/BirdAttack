@@ -8,7 +8,7 @@ using UnityEngine.UI;
  * ゲーム開始時にターゲットとなるオブジェクトを見つけて、
  * オブジェクトが消滅したらゲームクリアとする
  */
-public class GameManager : MonoBehaviour
+public class ClearFlagManager : MonoBehaviour
 {
 	public GameObject ClearText;
 

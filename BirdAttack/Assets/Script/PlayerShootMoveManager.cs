@@ -2,39 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveManager : MonoBehaviour
+public class PlayerShootMoveManager : MonoBehaviour
 {
 	public float ShootSpeed = 10f;
 
+	private GamePlaySequenceManager GameState;
 	private Rigidbody rbyPlayer;
-	private bool fShoot = false;
-	private bool fPlayerMove = false;
-	private Vector3 ShootVectol = Vector3.zero;
+	private Vector3 ShootVectol;
 
 	void Start()
 	{
+		GameObject GameManager = GameObject.Find("GameManager");
+		GameState = GameManager.GetComponent<GamePlaySequenceManager>();
 		rbyPlayer = GetComponent<Rigidbody>();
+		ShootVectol = Vector3.zero;
 	}
 
 	void FixedUpdate()
 	{
 		/* マウスが放された時一度だけ力を加えてプレイヤーを動かす */
-		if( fShoot == true ){
-			fShoot = false;
-			fPlayerMove = true;
-
+		if( GameState.PlayerState == GameSequenceState.SHOOT ){
+			GameState.PlayerState = GameSequenceState.MOVE;
 			rbyPlayer.AddForce( ShootVectol * ShootSpeed, ForceMode.Acceleration );
-		}
-
-		/* 発射後の移動 */
-		if( fPlayerMove == true ){
-
 		}
 	}
 
 	public void ShootPlayer( Vector3 DragPosition )
 	{
-		fShoot = true;
+		GameState.PlayerState = GameSequenceState.SHOOT;
 		rbyPlayer.useGravity = true;
 		ShootVectol = DragPosition;
 	}

@@ -49,15 +49,14 @@
      <Compile Include="Assets\Script\ArrowTransformController.cs" />
      <Compile Include="Assets\Script\BlockDeleat.cs" />
      <Compile Include="Assets\Script\CameraController.cs" />
+     <Compile Include="Assets\Script\ClearFlagManager.cs" />
      <Compile Include="Assets\Script\ClickPositionManager.cs" />
-     <Compile Include="Assets\Script\GameManager.cs" />
+     <Compile Include="Assets\Script\GamePlaySequenceManager.cs" />
      <Compile Include="Assets\Script\ParticleDead.cs" />
      <Compile Include="Assets\Script\PlayerDead.cs" />
-     <Compile Include="Assets\Script\PlayerMoveManager.cs" />
+     <Compile Include="Assets\Script\PlayerShootMoveManager.cs" />
+     <Compile Include="Assets\Script\PlayerStartPosition.cs" />
      <Compile Include="Assets\ScriptUtility\FontScalable.cs" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -72,9 +71,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
