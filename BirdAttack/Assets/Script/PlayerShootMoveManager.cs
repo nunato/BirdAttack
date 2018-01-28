@@ -6,14 +6,14 @@ public class PlayerShootMoveManager : MonoBehaviour
 {
 	public float ShootSpeed = 10f;
 
-	private GamePlaySequenceManager GameState;
+	private PlayerStatusManager PlayerState;
 	private Rigidbody rbyPlayer;
 	private Vector3 ShootVectol;
 
 	void Start()
 	{
 		GameObject GameManager = GameObject.Find("GameManager");
-		GameState = GameManager.GetComponent<GamePlaySequenceManager>();
+		PlayerState = GameManager.GetComponent<PlayerStatusManager>();
 		rbyPlayer = GetComponent<Rigidbody>();
 		ShootVectol = Vector3.zero;
 	}
@@ -21,15 +21,15 @@ public class PlayerShootMoveManager : MonoBehaviour
 	void FixedUpdate()
 	{
 		/* マウスが放された時一度だけ力を加えてプレイヤーを動かす */
-		if( GameState.PlayerState == GameSequenceState.SHOOT ){
-			GameState.PlayerState = GameSequenceState.MOVE;
+		if( PlayerState.PlayerStatus == PLAYER_STATUS_T.SHOOT ){
+			PlayerState.PlayerStatus = PLAYER_STATUS_T.MOVE;
 			rbyPlayer.AddForce( ShootVectol * ShootSpeed, ForceMode.Acceleration );
 		}
 	}
 
 	public void ShootPlayer( Vector3 DragPosition )
 	{
-		GameState.PlayerState = GameSequenceState.SHOOT;
+		PlayerState.PlayerStatus = PLAYER_STATUS_T.SHOOT;
 		rbyPlayer.useGravity = true;
 		ShootVectol = DragPosition;
 	}

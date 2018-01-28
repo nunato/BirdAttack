@@ -11,7 +11,7 @@ public class ClickPositionManager : MonoBehaviour
 	private Vector3 mouseDownPosition = Vector3.zero;
 	private PlayerShootMoveManager playerMove;
 	private ArrowTransformController arrowController;
-	private GamePlaySequenceManager GameState;
+	private PlayerStatusManager PlayerState;
 
 	/* 
 	 * 初期化関数
@@ -26,12 +26,12 @@ public class ClickPositionManager : MonoBehaviour
 		arrowController = arrowTransformController.GetComponent<ArrowTransformController>();
 
 		GameObject GameManager = GameObject.Find("GameManager");
-		GameState = GameManager.GetComponent<GamePlaySequenceManager>();
+		PlayerState = GameManager.GetComponent<PlayerStatusManager>();
 	}
 
 	void Update()
 	{
-		if( GameState.PlayerState != GameSequenceState.IDLE ){
+		if( PlayerState.PlayerStatus != PLAYER_STATUS_T.IDLE ){
 			return;
 		}
 
