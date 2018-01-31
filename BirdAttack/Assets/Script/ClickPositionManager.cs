@@ -8,16 +8,18 @@ using UnityEngine;
  */
 public class ClickPositionManager : MonoBehaviour
 {
-	private Vector3 mouseDownPosition = Vector3.zero;
-	private PlayerShootMoveManager playerMove;
-	private ArrowTransformController arrowController;
-	private PlayerStatusManager PlayerState;
+	private Vector3 mouseDownPosition = Vector3.zero;	/* クリック位置の記憶 */
+	private PlayerShootMoveManager playerMove;			/* プレイヤーへの参照 */
+	private ArrowTransformController arrowController;	/* 矢印アイコンの表示 */
+	private PlayerStatusManager PlayerState;			/* プレイヤー状態への参照 */
+	private ShootRemainManager ShootRemainCount;		/* 残数への参照 */
+	private ClearFlagManager ClearFlag;					/* クリアフラグへの参照 */
 
 	/* 
 	 * 初期化関数
 	 * プレイヤーオブジェクトへの参照と矢印アイコンの参照
 	 */
-	void Awake()
+	void Start()
 	{
 		GameObject PlayerObj = GameObject.Find("Player");
 		playerMove = PlayerObj.GetComponent<PlayerShootMoveManager>();
@@ -27,11 +29,16 @@ public class ClickPositionManager : MonoBehaviour
 
 		GameObject GameManager = GameObject.Find("GameManager");
 		PlayerState = GameManager.GetComponent<PlayerStatusManager>();
+		ClearFlag = GameManager.GetComponent<ClearFlagManager>();
+
+		GameObject RemainManager = GameObject.Find("RemainManager");
+		ShootRemainCount = RemainManager.GetComponent<ShootRemainManager>();
 	}
 
 	void Update()
 	{
-		if( PlayerState.PlayerStatus != PLAYER_STATUS_T.IDLE ){
+		if( PlayerState.PlayerStatus != PLAYER_STATUS_T.IDLE	||
+			ClearFlag.GameOver == true							){
 			return;
 		}
 
@@ -58,6 +65,7 @@ public class ClickPositionManager : MonoBehaviour
 			Vector3 ShootVector = mouseDownPosition - mouseUpPosition;
 
 			playerMove.ShootPlayer( ShootVector );
+			ShootRemainCount.DecrementRemain();
 		}
 	}
 }
