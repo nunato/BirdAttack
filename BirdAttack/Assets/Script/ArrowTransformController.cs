@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ArrowTransformController : MonoBehaviour
 {
+	public float MaxArrowLength = 250;
+
 	private float panelWidth;
 	private RectTransform panelRect;
 	private Vector3 playerPosition;
@@ -30,17 +32,19 @@ public class ArrowTransformController : MonoBehaviour
 	{
 		float diffx = DownPosition.x - DragPosition.x;
 		float diffy = DownPosition.y - DragPosition.y;
-//		Debug.Log( "x " + diffx + ",y " + diffy );
+
 		/* 長さを求める */
 		float panelHeight = Mathf.Sqrt( Mathf.Pow( diffx, 2) + Mathf.Pow( diffy, 2));
-//		Debug.Log( "panelHeight" + panelHeight );
+
+		if( panelHeight > MaxArrowLength){
+			panelHeight = MaxArrowLength;
+		}
 
 		/* 2Dベクトルから角度を求める */
 		/* 右方向にX、上方向にYとする */
 		float rot = Mathf.Atan2( diffx, diffy ) * 180 / Mathf.PI;
 		/* ベクトルと正反対の方向に飛ぶので角度を逆転する */
 		rot = rot + 180;
-//		Debug.Log( "rot " + rot );
 
 		panelRect.position = Camera.main.WorldToScreenPoint( playerPosition );
 		panelRect.sizeDelta = new Vector2( panelWidth, panelHeight );

@@ -15,10 +15,6 @@ public class ClickPositionManager : MonoBehaviour
 	private ShootRemainManager ShootRemainCount;		/* 残数への参照 */
 	private ClearFlagManager ClearFlag;					/* クリアフラグへの参照 */
 
-	/* 
-	 * 初期化関数
-	 * プレイヤーオブジェクトへの参照と矢印アイコンの参照
-	 */
 	void Start()
 	{
 		GameObject PlayerObj = GameObject.Find("Player");
@@ -63,6 +59,9 @@ public class ClickPositionManager : MonoBehaviour
 			mouseUpPosition .z = 0;
 
 			Vector3 ShootVector = mouseDownPosition - mouseUpPosition;
+
+			/* ベクトル上限に制限する */
+			ShootVector = MaxShootPowerCheck.LimitShootVector( ShootVector );
 
 			playerMove.ShootPlayer( ShootVector );
 			ShootRemainCount.DecrementRemain();
