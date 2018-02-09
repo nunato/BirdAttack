@@ -8,6 +8,8 @@ using UnityEngine;
  */
 public class ClickPositionManager : MonoBehaviour
 {
+	public float MaxPower = 200f;
+
 	private Vector3 mouseDownPosition = Vector3.zero;	/* クリック位置の記憶 */
 	private PlayerShootMoveManager playerMove;			/* プレイヤーへの参照 */
 	private ArrowTransformController arrowController;	/* 矢印アイコンの表示 */
@@ -61,10 +63,31 @@ public class ClickPositionManager : MonoBehaviour
 			Vector3 ShootVector = mouseDownPosition - mouseUpPosition;
 
 			/* ベクトル上限に制限する */
-			ShootVector = MaxShootPowerCheck.LimitShootVector( ShootVector );
+			ShootVector = LimitShootVector( ShootVector );
 
 			playerMove.ShootPlayer( ShootVector );
 			ShootRemainCount.DecrementRemain();
 		}
+	}
+
+	private Vector3 LimitShootVector( Vector3 ShootVector )
+	{
+		Vector3 LimitVector = Vector3.zero;
+
+		if( ShootVector.x > MaxPower ){
+			float crop = MaxPower / ShootVector.x;
+
+			LimitVector.x = ShootVector.x * crop;
+			LimitVector.y = ShootVector.y * crop;
+		}
+
+		if( ShootVector.y > MaxPower ){
+			float crop = MaxPower / ShootVector.y;
+
+			LimitVector.x = ShootVector.x * crop;
+			LimitVector.y = ShootVector.y * crop;
+		}
+
+		return LimitVector;
 	}
 }
