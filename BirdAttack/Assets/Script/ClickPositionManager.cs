@@ -72,7 +72,8 @@ public class ClickPositionManager : MonoBehaviour
 
 	private Vector3 LimitShootVector( Vector3 ShootVector )
 	{
-		Vector3 LimitVector = Vector3.zero;
+		Vector3 LimitVector;
+		LimitVector = ShootVector;
 
 		if( ShootVector.x > MaxPower ){
 			float crop = MaxPower / ShootVector.x;
